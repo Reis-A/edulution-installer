@@ -174,11 +174,11 @@ cd $DIRECTORY
 
 for file in docker-compose.yml realm-edulution.json traefik.yml edulution-default.yml; do
 
-    echo "[*] Herunterladen der Datei $file..."
-    curl -s -o ${DIRECTORY}${file} https://get.edulution.io/download/${file}.template
+    echo "[*] Kopieren der Datei $file..."
+    cp edulution-installer/public/download/${file}.template ${DIRECTORY}${file}
 
     if [ ! -f "${DIRECTORY}${file}" ]; then
-        echo "[!] Datei '$file' konnte nicht heruntergeladen werden!"
+        echo "[!] Datei '$file' konnte nicht kopiert werden!"
         exit 1
     fi
 
