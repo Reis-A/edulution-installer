@@ -393,7 +393,7 @@ def checkLDAP(data: Data = Depends(getData)):
                 get_info=ALL,
                 connect_timeout=3,
                 use_ssl=True,
-                tls=Tls(validate=ssl.CERT_REQUIRED),
+                tls=Tls(validate=ssl.CERT_NONE,version=ssl.PROTOCOL_TLS_CLIENT,ciphers='ALL')
             )
         else:
             server = Server(
@@ -426,7 +426,7 @@ def checkLDAP(data: Data = Depends(getData)):
                 get_info=ALL,
                 connect_timeout=3,
                 use_ssl=True,
-                tls=Tls(validate=ssl.CERT_REQUIRED),
+                tls=Tls(validate=ssl.CERT_NONE,version=ssl.PROTOCOL_TLS_CLIENT,ciphers='ALL')
             )
         else:
             server = Server(
@@ -505,7 +505,7 @@ def generateRandom(length=5):
 
 
 def createEdulutionEnvFile(data: Data):
-    schulkuerzel= data.DATA_LMN_BINDUSER_DN.split(",")[0].split("-")[1] # binduser has to include schulkuerzel in the form cn=ldapuser-WGS,ou=...
+    SCHULKUERZEL= data.DATA_LMN_BINDUSER_DN.split(",")[0].split("-")[1] # binduser has to include schulkuerzel in the form cn=ldapuser-WGS,ou=...
     root_dn = "o=ml3"
 
     keycloak_eduapi_secret = generateSecret()

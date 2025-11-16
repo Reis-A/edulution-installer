@@ -3,7 +3,7 @@ services:
     build:
       context: .
     volumes:
-      - ./data:/edulution-ui
+      - /srv/docker/edulution-ui/:/edulution-ui
       - ./edulution-webinstaller/app:/app
       - ./public/css/style.css:/app/css/style.css
       - /var/run/docker.sock:/var/run/docker.sock
@@ -11,5 +11,5 @@ services:
       - 443:8000
     entrypoint: /startup.sh
     environment:
-      - EDULUTION_DIRECTORY=/srv/docker/edulution-installer/data
+      - EDULUTION_DIRECTORY=/srv/docker/edulution-ui
     container_name: edulution-installer
