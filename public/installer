@@ -175,7 +175,7 @@ cd $DIRECTORY
 for file in docker-compose.yml realm-edulution.json traefik.yml edulution-default.yml; do
 
     echo "[*] Kopieren der Datei $file..."
-    cp edulution-installer/public/download/${file}.template ${DIRECTORY}${file}
+    cp /root/edulution-installer/public/download/${file}.template ${DIRECTORY}${file}
 
     if [ ! -f "${DIRECTORY}${file}" ]; then
         echo "[!] Datei '$file' konnte nicht kopiert werden!"
