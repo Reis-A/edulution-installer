@@ -505,7 +505,8 @@ def generateRandom(length=5):
 
 
 def createEdulutionEnvFile(data: Data):
-    root_dn = re.search(r"(DC=.*$)", data.DATA_LMN_BINDUSER_DN).group(1)
+    schulkuerzel= data.DATA_LMN_BINDUSER_DN.split(",")[0].split("-")[1] # binduser has to include schulkuerzel in the form cn=ldapuser-WGS,ou=...
+    root_dn = "o=ml3"
 
     keycloak_eduapi_secret = generateSecret()
     keycloak_eduui_secret = generateSecret()
@@ -552,10 +553,10 @@ def createEdulutionEnvFile(data: Data):
                 "org.keycloak.storage.ldap.mappers.LDAPStorageMapper"
             ]:
                 if subcomp["name"] == "global-groups":
-                    subcomp["config"]["groups.dn"] = ["OU=Groups,OU=Global," + root_dn]
+                    subcomp["config"]["groups.dn"] = ["ou=server," + root_dn]
                 if subcomp["name"] == "school-groups":
-                    subcomp["config"]["groups.dn"] = ["OU=SCHOOLS," + root_dn]
-            comp["config"]["usersDn"] = [root_dn]
+                    subcomp["config"]["groups.dn"] = ["ou=Lehrer,ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
+            comp["config"]["usersDn"] = ["ou=Lehrer,ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
             comp["config"]["bindDn"] = [data.DATA_LMN_BINDUSER_DN]
             comp["config"]["bindCredential"] = [data.DATA_LMN_BINDUSER_PW]
             comp["config"]["connectionUrl"] = [
