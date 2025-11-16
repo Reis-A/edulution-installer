@@ -1,5 +1,5 @@
 services:
-  edulution-installer-dev:
+  edulution-installer:
     build:
       context: .
     volumes:
