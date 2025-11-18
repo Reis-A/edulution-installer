@@ -22,9 +22,9 @@ async function checkToken() {
 }
 
 var check_api_status = false;
-var check_webdav_status = false;
+var check_webdav_status = true;
 var check_ldap_status = false;
-var check_ldap_access_status = false;
+var check_ldap_access_status = true;
 
 function checkChecks() {
   if (
@@ -167,9 +167,9 @@ async function checkLDAPAccessStatus() {
 
 function checkAll() {
   checkAPIStatus();
-  checkWebDAVStatus();
+ // checkWebDAVStatus();
   checkLDAPStatus();
-  checkLDAPAccessStatus();
+	//checkLDAPAccessStatus();
 }
 
 function waitforUI() {

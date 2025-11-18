@@ -1,6 +1,8 @@
 <h4>Überprüfung der Abhängigkeiten</h3>
 <br />
-<div class="card">
+
+<!--
+ <div class="card">
   <div class="card-body">
     <div class="card-icon" id="api_status">
       <i class="fa-solid fa-spinner fa-spin"></i>
@@ -12,18 +14,20 @@
         class="qr-login-btn"
         onclick="checkAPIStatus()"
         id="api_status_retry"
-      >
+	>
         Erneut prüfen
       </button>
     </div>
   </div>
-</div>
+ </div>
+-->
+
 <div class="card">
   <div class="card-body">
     <div class="card-icon" id="webdav_status">
       <i class="fa-solid fa-spinner fa-spin"></i>
     </div>
-    <div class="card-text">Überprüfung des WebDAV-Servers</div>
+    <div class="card-text">Überprüfung des G-Servers</div>
     <div class="card-button">
       <button
         type="button"
@@ -54,6 +58,7 @@
     </div>
   </div>
 </div>
+<!--
 <div class="card">
   <div class="card-body">
     <div class="card-icon" id="ldap-access_status">
@@ -67,11 +72,13 @@
         onclick="checkLDAPAccessStatus()"
         id="ldap-access_status_retry"
       >
+    
         Erneut prüfen
       </button>
     </div>
   </div>
 </div>
+    -->
 <form method="GET" action="/set-admin-group">
   <button type="submit" class="login-submit-btn" id="cert_button" disabled>
     Weiter

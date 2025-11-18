@@ -353,7 +353,7 @@ def checkToken(token: Token):
 def checkAPIStatus(data: Data = Depends(getData)):
     try:
         result = requests.get(
-            "https://" + data.DATA_LMN_EXTERNAL_DOMAIN + ":8001",
+            "https://" + data.DATA_LMN_EXTERNAL_DOMAIN + ":443", 
             verify=False,
             timeout=3,
         )
@@ -388,13 +388,13 @@ def checkLDAP(data: Data = Depends(getData)):
     try:
         if data.DATA_LMN_LDAP_SCHEMA == "ldaps":
             server = Server(
-                data.DATA_LMN_EXTERNAL_DOMAIN,
+                data.DATA_LMN_BINDUSER_DN,
                 port=int(data.DATA_LMN_LDAP_PORT),
                 get_info=ALL,
                 connect_timeout=3,
                 use_ssl=True,
-                tls=Tls(validate=ssl.CERT_NONE,version=ssl.PROTOCOL_TLS_CLIENT,ciphers='ALL')
-            )
+                tls=Tls(validate=ssl.CERT_REQUIRED,version=ssl.PROTOCOL_TLS_CLIENT,ciphers='ALL')
+            ) #LDAPSERVER ADRESS in BINDUSER VARIABLE
         else:
             server = Server(
                 data.DATA_LMN_EXTERNAL_DOMAIN,
@@ -505,8 +505,10 @@ def generateRandom(length=5):
 
 
 def createEdulutionEnvFile(data: Data):
-    SCHULKUERZEL= data.DATA_LMN_BINDUSER_DN.split(",")[0].split("-")[1] # binduser has to include schulkuerzel in the form cn=ldapuser-WGS,ou=...
+    #SCHULKUERZEL= data.DATA_LMN_BINDUSER_DN.split(",")[0].split("-")[1] # binduser has to include schulkuerzel in the form cn=ldapuser-WGS,ou=...
+    SCHULKUERZEL=data.DATA_LMN_BINDUSER_PW
     root_dn = "o=ml3"
+    LDAPADDRESS= data.DATA_LMN_BINDUSER_DN
 
     keycloak_eduapi_secret = generateSecret()
     keycloak_eduui_secret = generateSecret()
@@ -553,16 +555,16 @@ def createEdulutionEnvFile(data: Data):
                 "org.keycloak.storage.ldap.mappers.LDAPStorageMapper"
             ]:
                 if subcomp["name"] == "global-groups":
-                    subcomp["config"]["groups.dn"] = ["ou=server," + root_dn]
+                    subcomp["config"]["groups.dn"] = ["ou=rollen" + root_dn]
                 if subcomp["name"] == "school-groups":
-                    subcomp["config"]["groups.dn"] = ["ou=Lehrer,ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
-            comp["config"]["usersDn"] = ["ou=Lehrer,ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
-            comp["config"]["bindDn"] = [data.DATA_LMN_BINDUSER_DN]
-            comp["config"]["bindCredential"] = [data.DATA_LMN_BINDUSER_PW]
+                    subcomp["config"]["groups.dn"] = ["ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
+            comp["config"]["usersDn"] = ["ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
+           # comp["config"]["bindDn"] = [data.DATA_LMN_BINDUSER_DN]
+           # comp["config"]["bindCredential"] = [data.DATA_LMN_BINDUSER_PW]
             comp["config"]["connectionUrl"] = [
                 data.DATA_LMN_LDAP_SCHEMA
                 + "://"
-                + data.DATA_LMN_EXTERNAL_DOMAIN
+                + LDAPADDRESS
                 + ":"
                 + str(data.DATA_LMN_LDAP_PORT)
             ]

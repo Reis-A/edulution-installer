@@ -1899,7 +1899,7 @@
                   "cn"
                 ],
                 "preserve.group.inheritance": [
-                  "true"
+                  "false"
                 ],
                 "membership.user.ldap.attribute": [
                   "cn"
@@ -1914,7 +1914,7 @@
                   "IMPORT"
                 ],
                 "user.roles.retrieve.strategy": [
-                  "GET_GROUPS_FROM_USER_MEMBEROF_ATTRIBUTE"
+                  "GET_GROUPS_FROM_USER_MEMBER_ATTRIBUTE"
                 ],
                 "ignore.missing.groups": [
                   "false"
@@ -1923,7 +1923,7 @@
                   "member"
                 ],
                 "group.object.classes": [
-                  "group"
+                  "groupofNames"
                 ],
                 "memberof.ldap.attribute": [
                   "memberOf"
@@ -1987,7 +1987,7 @@
                   "IMPORT"
                 ],
                 "user.roles.retrieve.strategy": [
-                  "GET_GROUPS_FROM_USER_MEMBEROF_ATTRIBUTE"
+                  "GET_GROUPS_FROM_USER_MEMBER_ATTRIBUTE"
                 ],
                 "membership.ldap.attribute": [
                   "member"
@@ -1996,7 +1996,7 @@
                   "false"
                 ],
                 "group.object.classes": [
-                  "group"
+                  "groupofNames"
                 ],
                 "memberof.ldap.attribute": [
                   "memberOf"
@@ -2092,32 +2092,13 @@
             },
             {
               "id": "1b6a3ed5-abf9-41d0-ac50-cd90491c3977",
-              "name": "school",
-              "providerId": "user-attribute-ldap-mapper",
-              "subComponents": {},
-              "config": {
-                "ldap.attribute": [
-                  "sophomorixSchoolname"
-                ],
-                "attribute.force.default": [
-                  "false"
-                ],
-                "is.mandatory.in.ldap": [
-                  "false"
-                ],
-                "is.binary.attribute": [
-                  "false"
-                ],
-                "read.only": [
-                  "true"
-                ],
-                "always.read.value.from.ldap": [
-                  "false"
-                ],
-                "user.model.attribute": [
-                  "school"
-                ]
-              }
+              "name" : "school",
+              "providerId" : "hardcoded-ldap-attribute-mapper",
+              "subComponents" : { },
+              "config" : {
+                 "ldap.attribute.value" : [ "WGS" ],
+                 "ldap.attribute.name" : [ "school" ]
+               }
             },
             {
               "id": "a9d05dce-f65b-4d80-adae-0145646bdc03",
@@ -2126,8 +2107,9 @@
               "subComponents": {},
               "config": {
                 "ldap.attribute": [
-                  "whenCreated"
+                  "createTimestamp"
                 ],
+                "attribute.force.default" : [ "true" ],
                 "is.mandatory.in.ldap": [
                   "false"
                 ],
@@ -2149,11 +2131,12 @@
               "subComponents": {},
               "config": {
                 "ldap.attribute": [
-                  "whenChanged"
+                  "modifyTimestamp"
                 ],
                 "is.mandatory.in.ldap": [
                   "false"
                 ],
+                "attribute.force.default" : [ "true" ],
                 "always.read.value.from.ldap": [
                   "false"
                 ],
@@ -2237,10 +2220,10 @@
             "1729761714"
           ],
           "vendor": [
-            "ad"
+            "edirectory"
           ],
           "uuidLDAPAttribute": [
-            "samaccountname"
+            "uid"
           ],
           "allowKerberosAuthentication": [
             "false"
@@ -2252,7 +2235,7 @@
             "false"
           ],
           "authType": [
-            "simple"
+            "none"
           ],
           "krbPrincipalAttribute": [
             "userPrincipalName"
@@ -2273,7 +2256,7 @@
             "true"
           ],
           "userObjectClasses": [
-            "person"
+            "inetOrgPerson, organizationalPerson"
           ],
           "evictionMinute": [
             "0"
