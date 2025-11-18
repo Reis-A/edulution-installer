@@ -2222,6 +2222,8 @@
           "vendor": [
             "edirectory"
           ],
+          "userLdapFilter": ["(!(loginDisabled=True))"
+          ],
           "uuidLDAPAttribute": [
             "uid"
           ],
