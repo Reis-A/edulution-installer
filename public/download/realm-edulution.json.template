@@ -1914,7 +1914,7 @@
                   "IMPORT"
                 ],
                 "user.roles.retrieve.strategy": [
-                  "GET_GROUPS_FROM_USER_MEMBER_ATTRIBUTE"
+                  "LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"
                 ],
                 "ignore.missing.groups": [
                   "false"
@@ -1987,7 +1987,7 @@
                   "IMPORT"
                 ],
                 "user.roles.retrieve.strategy": [
-                  "GET_GROUPS_FROM_USER_MEMBER_ATTRIBUTE"
+                  "LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"
                 ],
                 "membership.ldap.attribute": [
                   "member"
