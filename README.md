@@ -3,11 +3,11 @@
 <img src="public/img/edulution.io_USER_INTERFACE.png" style="width:60%" />
 </div>
 As prerequisites the following (dynamic) ldapgoups have to be created and populated in Novell eDirectoryh in the dn
-ou=rollen,o=ml3
+ou=rollen,ou=benutzer,ou=S01,ou=schulen,o=ml3
 Recommended is the use of dynamic groups in combination of the Schulkonsolen script to fill the member attribute of the users.
 role-teacher
 role-student
-role-globaladministrator
+role-globaladministrator , e.g. put schuladmin-s01 into this group
 role-schooladministrator (optional)
 Recommended is the use of dynamic use with user filters to add the appropiate users to those groups.
 Afterwards, use the Schulkonsolen feature to add the group memberships of those dynamic groups to the member attribute of the users.

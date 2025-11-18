@@ -557,7 +557,7 @@ def createEdulutionEnvFile(data: Data):
                 if subcomp["name"] == "school":
                     subcomp["config"]["ldap.attribute.value"]= [ SCHULKUERZEL]
                 if subcomp["name"] == "global-groups":
-                    subcomp["config"]["groups.dn"] = ["ou=rollen" + root_dn]
+                    subcomp["config"]["groups.dn"] = ["ou=rollen,ou=benutzer,ou="+SCHULKUERZEL+"ou=schulen" + root_dn]
                 if subcomp["name"] == "school-groups":
                     subcomp["config"]["groups.dn"] = ["ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
             comp["config"]["usersDn"] = ["ou=benutzer,ou="+SCHULKUERZEL+",ou=schulen," + root_dn]
