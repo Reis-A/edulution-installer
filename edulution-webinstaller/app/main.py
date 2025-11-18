@@ -553,7 +553,9 @@ def createEdulutionEnvFile(data: Data):
         if comp["name"] == "ldap":
             for subcomp in comp["subComponents"][
                 "org.keycloak.storage.ldap.mappers.LDAPStorageMapper"
-            ]:
+            ]:   
+                if subcomp["name"] == "school":
+                    subcomp["config"]["ldap.attribute.value"]= [ SCHULKUERZEL]
                 if subcomp["name"] == "global-groups":
                     subcomp["config"]["groups.dn"] = ["ou=rollen" + root_dn]
                 if subcomp["name"] == "school-groups":
