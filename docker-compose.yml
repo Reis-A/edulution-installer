@@ -1,5 +1,5 @@
 services:
-  edulution-installer-dev:
+  edulution-installer:
     container_name: edulution-installer-dev
     build:
       context: .
